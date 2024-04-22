@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Modal } from 'react-bootstrap'
+import { Button, FloatingLabel, Form, Modal } from 'react-bootstrap'
 
 
 function Add() {
@@ -11,19 +11,26 @@ function Add() {
 
   return (
     <>
-       <div className='d-flex p-5'>
+      <div className='d-flex p-5'>
         <h5>Upload new vidio</h5>
-        <button className='btn bg-warning rounded-circle ms-3 fw-bolder'  onClick={handleShow}>+</button>
-    </div>
-    <Modal show={show} onHide={handleClose}>
+        <button className='btn bg-warning rounded-circle ms-3 fw-bolder' onClick={handleShow}>+</button>
+      </div>
+      <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Vidio Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <p>Please fill the following detail</p>
-            <input className='w-100 mt-2' type="text" placeholder='' form-control />
-            <input className='w-100 mt-2 ' type="text" placeholder='' />
-            <input className='w-100 mt-2' type="text" placeholder='' />
+          <div>
+            <FloatingLabel
+              controlId="floatingInput" label="Email address" className="mb-3">   <Form.Control type="email" placeholder="name@example.com" />
+            </FloatingLabel>
+            <FloatingLabel
+              controlId="floatingInput" label="Email address" className="mb-3">   <Form.Control type="email" placeholder="name@example.com" />
+            </FloatingLabel>
+            <FloatingLabel
+              controlId="floatingInput" label="Email address" className="mb-3">   <Form.Control type="email" placeholder="name@example.com" />
+            </FloatingLabel>
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
