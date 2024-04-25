@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import { Button, FloatingLabel, Form, Modal } from 'react-bootstrap'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 function Add() {
@@ -33,7 +36,7 @@ function Add() {
     if(caption && imgURL && youtubeURL){
         console.log("api");
     }else{
-      alert("please fill the form")
+      toast.warning("please fill the form")
     }
   }
 
@@ -72,6 +75,7 @@ function Add() {
           </Button>
         </Modal.Footer>
       </Modal>
+      <ToastContainer position="top-center" theme="dark" autoclose={3000}/>
     </>
   )
 }
