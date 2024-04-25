@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Button, FloatingLabel, Form, Modal } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { addVideoAPI } from '../Services/allAPI';
 
 
 
@@ -30,11 +31,20 @@ function Add() {
     }
   }
 
-  const handleUpload = ()=>{
+  const handleUpload = async()=>{
     console.log("uploaded");
     const {caption,imgURL,youtubeURL} = vidioDetail
     if(caption && imgURL && youtubeURL){
         console.log("api");
+        try {
+        const result =  await addVideoAPI(vidioDetail)
+          if(result.status>=200 && result.status <300){
+            console.log(result.data);
+            toast.success(`${result.data.caption} added to yor collection`)
+          }        
+        } catch (error) {
+          toast.error(result.res.data)
+        }
     }else{
       toast.warning("please fill the form")
     }

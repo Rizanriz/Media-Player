@@ -6,7 +6,7 @@ function History() {
     <div className='container'>
       <div className='d-flex justify-content-between'>
           <h3>Watch History</h3>
-          <Link to={"/home"}>Back to home</Link>
+          <Link to={"/home"}> <button className='btn'>Back to home</button> </Link>
       </div>
       <table className='table my-5'> 
         <thead>

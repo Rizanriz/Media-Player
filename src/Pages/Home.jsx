@@ -8,7 +8,6 @@ function Home() {
   return (
     <div>
       <Add/>
-        <Link to={"/History"}>Watch History </Link>
         <div className="row">
           <div className="col-lg-6">
           <h2>All Vidios</h2>
@@ -18,7 +17,9 @@ function Home() {
             <h3>Category</h3>
           </div>
         </div>
+        <Link to={"/History"}> <button className='btn bg-warning mt-5'>Watch History</button> </Link>
     </div>
+    
   )
 }
 

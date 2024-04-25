@@ -12,11 +12,10 @@ function VidioCard() {
   return (
     <>
         <Card >
-      <Card.Img onClick={handleShow} variant="top" style={{height:"180px"}} src="https://pixlr.com/images/index/ai-image-generator-one.webp" />
+      <Card.Img onClick={handleShow} variant="top" style={{height:"180px"}} src="https://upload.wikimedia.org/wikipedia/en/4/4c/Deadpool_%26_Wolverine_poster.jpg" />
       <Card.Body>
-        <Card.Title>Card Title</Card.Title>
+        <Card.Title>Caption</Card.Title>
         <Card.Text>
-          <p>Coption</p>
           <button className='btn'><i class="fa-solid fa-trash"></i></button>
         </Card.Text>
       </Card.Body>
