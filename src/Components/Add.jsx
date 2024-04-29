@@ -6,7 +6,7 @@ import { addVideoAPI } from '../Services/allAPI';
 
 
 
-function Add() {
+function Add({setAddvidioRes}) {
 
   const [vidioDetail, setVidioDetail] = useState({
     caption: "", imgURL: "", youtubeURL: "",
@@ -40,6 +40,7 @@ function Add() {
         const result =  await addVideoAPI(vidioDetail)
           if(result.status>=200 && result.status <300){
             console.log(result.data);
+            setAddvidioRes(result.data)
             toast.success(`${result.data.caption} added to yor collection`)
           }        
         } catch (error) {
@@ -65,10 +66,10 @@ function Add() {
             <FloatingLabel controlId="floatingInput" label="vidio" className="mb-3">
               <Form.Control onChange={e=>setVidioDetail({...vidioDetail,caption:e.target.value})} type="text" />
             </FloatingLabel>
-            <FloatingLabel controlId="floatingInput" label="vidio" className="mb-3">  
+            <FloatingLabel controlId="floatingInput" label="image url" className="mb-3">  
                <Form.Control onChange={e=>setVidioDetail({...vidioDetail,imgURL:e.target.value})} type="text" />
             </FloatingLabel>
-            <FloatingLabel controlId="floatingInput" label="vidio" className="mb-3">  
+            <FloatingLabel controlId="floatingInput" label="vidio url" className="mb-3">  
                <Form.Control onChange={e=>getemdURL(e.target.value)} type="text" />
             </FloatingLabel>
             {
