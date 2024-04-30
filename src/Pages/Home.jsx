@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Add from "./../Components/Add"
 import View from '../Components/View'
 import { Link } from 'react-router-dom'
+import Category from '../Components/Category'
 
 
 function Home() {
@@ -17,7 +18,7 @@ function Home() {
           <View addvidioRes={addvidioRes}/>
           </div>
           <div className="col-lg-6">
-            <h3 className='text-center'>Category</h3>
+            <Category/>
           </div>
         </div>
         <Link to={"/History"}> <button className='btn bg-warning mt-5'>Watch History</button> </Link>

@@ -16,6 +16,9 @@ export const removeVidioAPI = async (videoId)=>{
 export const saveHistoryAPI = async (video)=>{
     return await commonAPI("POST",`${server_url}/History`,video)
 }
-export const getHistoryAPI = async (video)=>{
-    return await commonAPI("GET",`${server_url}/allVideos`,video)
+export const getHistoryAPI = async ()=>{
+    return await commonAPI("GET",`${server_url}/History`,"")
+}
+export const removeHistoryAI = async (videoId)=>{
+    return await commonAPI("DELETE",`${server_url}/History/${videoId}`,{})
 }

@@ -1,7 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { getHistoryAPI, removeHistoryAI } from '../Services/allAPI'
 
 function History() {
+
+  const [vidioHistory,setVidioHistory] = useState([])
+
+  console.log(vidioHistory);
+  useEffect(()=>{
+    getAllHistory()
+  },[])
+
+  const getAllHistory = async()=>{
+    try {
+      const result = await getHistoryAPI()
+      setVidioHistory(result.data)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const handleHistory = async(videoId)=>{
+    try {
+      await removeHistoryAI(videoId)
+      getAllHistory()
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div className='container'>
       <div className='d-flex justify-content-between'>
@@ -10,7 +37,7 @@ function History() {
       </div>
       <table className='table my-5'> 
         <thead>
-          <tr>
+          <tr className='text-center'>
             <th>#</th>
             <th>Caption</th>
             <th>Vidio Link</th>
@@ -19,13 +46,20 @@ function History() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Deadpool</td>
-            <td><a href="https://www.youtube.com/embed/cen0rBKLuYE" target='blank'>https://www.youtube.com/embed/cen0rBKLuYE</a> </td>
-            <td>22/4/2024 10:15am</td>
-            <td><button className='btn'><i class="fa-solid fa-trash text-danger"></i></button></td>
+          {
+            vidioHistory.length>0?
+            vidioHistory?.map((item,index)=>(
+          <tr className='text-center' key={item?.id}>
+            <td>{index+1}</td>
+            <td>{item?.caption}</td>
+            <td><a href={item?.youtubeURL} target='blank'>{item?.youtubeURL}</a> </td>
+            <td>{item?.timeStamp}</td>
+            <td><button onClick={()=>handleHistory(item?.id)} className='btn'><i class="fa-solid fa-trash text-danger"></i></button></td>
           </tr>
+            ))
+          :
+          <div className="text-danger fw-bolder fs-5 p-3">NO HISTORY</div>
+          }
         </tbody>
       </table>
     </div>
