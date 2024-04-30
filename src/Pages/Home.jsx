@@ -7,9 +7,10 @@ import { Link } from 'react-router-dom'
 function Home() {
 
   const [addvidioRes,setAddvidioRes] = useState("")
+  
   return (
     <div>
-      <Add setAddvidioRes={setAddvidioRes}/>
+      <Add setAddvidioRes={setAddvidioRes} />
         <div className="row">
           <div className="col-lg-6">
           <h2 className='text-center'>All Vidios</h2>

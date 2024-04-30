@@ -6,47 +6,48 @@ import { addVideoAPI } from '../Services/allAPI';
 
 
 
-function Add({setAddvidioRes}) {
+function Add({ setAddvidioRes }) {
 
   const [vidioDetail, setVidioDetail] = useState({
     caption: "", imgURL: "", youtubeURL: "",
   })
 
-  const [invalidYTURL,setInvalidYTURL] = useState(false)
+  const [invalidYTURL, setInvalidYTURL] = useState(false)
   console.log(vidioDetail);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const getemdURL = (link)=>{
-    if(link.includes("v=")){
-        let vidioid=link.split("v=")[1].slice(0,11)
-        console.log(vidioid);
-        setVidioDetail({...vidioDetail,youtubeURL:`https://www.youtube.com/embed/${vidioid}`})
-        setInvalidYTURL(false)
-    }else{
-      setVidioDetail({...vidioDetail,youtubeURL:""})
+  const getemdURL = (link) => {
+    if (link.includes("v=")) {
+      let vidioid = link.split("v=")[1].slice(0, 11)
+      console.log(vidioid);
+      setVidioDetail({ ...vidioDetail, youtubeURL: `https://www.youtube.com/embed/${vidioid}` })
+      setInvalidYTURL(false)
+    } else {
+      setVidioDetail({ ...vidioDetail, youtubeURL: "" })
       setInvalidYTURL(true)
     }
   }
 
-  const handleUpload = async()=>{
+  const handleUpload = async () => {
     console.log("uploaded");
-    const {caption,imgURL,youtubeURL} = vidioDetail
-    if(caption && imgURL && youtubeURL){
-        console.log("api");
-        try {
-        const result =  await addVideoAPI(vidioDetail)
-          if(result.status>=200 && result.status <300){
-            console.log(result.data);
-            setAddvidioRes(result.data)
-            toast.success(`${result.data.caption} added to yor collection`)
-          }        
-        } catch (error) {
-          toast.error(result.res.data)
+    const { caption, imgURL, youtubeURL } = vidioDetail
+    if (caption && imgURL && youtubeURL) {
+      console.log("api");
+      try {
+        const result = await addVideoAPI(vidioDetail)
+        if (result.status >= 200 && result.status < 300) {
+          console.log(result.data);
+          setAddvidioRes(result.data)
+          setRemoveVidioRes(result.data)
+          toast.success(`${result.data.caption} added to yor collection`)
         }
-    }else{
+      } catch (error) {
+        toast.error(result.res.data)
+      }
+    } else {
       toast.warning("please fill the form")
     }
   }
@@ -64,16 +65,16 @@ function Add({setAddvidioRes}) {
         <Modal.Body>
           <div>
             <FloatingLabel controlId="floatingInput" label="vidio" className="mb-3">
-              <Form.Control onChange={e=>setVidioDetail({...vidioDetail,caption:e.target.value})} type="text" />
+              <Form.Control onChange={e => setVidioDetail({ ...vidioDetail, caption: e.target.value })} type="text" />
             </FloatingLabel>
-            <FloatingLabel controlId="floatingInput" label="image url" className="mb-3">  
-               <Form.Control onChange={e=>setVidioDetail({...vidioDetail,imgURL:e.target.value})} type="text" />
+            <FloatingLabel controlId="floatingInput" label="image url" className="mb-3">
+              <Form.Control onChange={e => setVidioDetail({ ...vidioDetail, imgURL: e.target.value })} type="text" />
             </FloatingLabel>
-            <FloatingLabel controlId="floatingInput" label="vidio url" className="mb-3">  
-               <Form.Control onChange={e=>getemdURL(e.target.value)} type="text" />
+            <FloatingLabel controlId="floatingInput" label="vidio url" className="mb-3">
+              <Form.Control onChange={e => getemdURL(e.target.value)} type="text" />
             </FloatingLabel>
             {
-                invalidYTURL && <div className='text-danger fw-bolder'>  Invalid youtube link</div>
+              invalidYTURL && <div className='text-danger fw-bolder'>  Invalid youtube link</div>
             }
           </div>
         </Modal.Body>
@@ -86,7 +87,7 @@ function Add({setAddvidioRes}) {
           </Button>
         </Modal.Footer>
       </Modal>
-      <ToastContainer position="top-center" theme="dark" autoclose={3000}/>
+      <ToastContainer position="top-center" theme="dark" autoclose={3000} />
     </>
   )
 }

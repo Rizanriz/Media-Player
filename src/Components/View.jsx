@@ -5,11 +5,14 @@ import { GetallVideoAPI } from '../Services/allAPI'
 
 function View({addvidioRes}) {
 
+  const [removeVidioRes,setRemoveVidioRes] = useState("")
   const [allVidios, setAllVidios] = useState([])
+
+
   console.log(allVidios);
   useEffect(() => {
     getAllVidio()
-  }, [addvidioRes])
+  }, [addvidioRes,removeVidioRes])
 
   const getAllVidio = async () => {
     try {
@@ -29,7 +32,7 @@ function View({addvidioRes}) {
         allVidios.length > 0 ?
           allVidios?.map(vidio => (
             <Col key={vidio?.id} sm={12} md={6} lg={4}>
-              <VidioCard displayData={vidio} />
+              <VidioCard displayData={vidio} setRemoveVidioRes={setRemoveVidioRes}/>
             </Col>
           ))
           :

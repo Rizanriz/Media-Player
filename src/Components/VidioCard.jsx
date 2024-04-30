@@ -1,13 +1,37 @@
 import React, { useState } from 'react'
 import { Card, Modal } from 'react-bootstrap'
+import { removeVidioAPI, saveHistoryAPI } from '../Services/allAPI';
 
 
-function VidioCard({ displayData }) {
+function VidioCard({ displayData,setRemoveVidioRes }) {
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+
+  const handleShow = async () =>{
+    setShow(true);
+    const {caption,youtubeURL} = displayData
+    const Time = new Date()
+    const formattedDate = Time.toLocaleString('en-US', { timeZoneName: 'short' });
+    console.log(formattedDate);
+
+    const vidioHistory = {caption,youtubeURL,timeStamp:formattedDate}
+    try {
+      const result = await saveHistoryAPI(vidioHistory)
+    } catch (error) {
+      console.log(error);
+    }
+  } 
+
+  const handleRemoveVidio = async(videoId)=>{
+    try {
+      const result = await removeVidioAPI(videoId)
+      setRemoveVidioRes(result.data)
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <>
@@ -16,7 +40,7 @@ function VidioCard({ displayData }) {
         <Card.Body>
           <Card.Title className='text-center fw-bold text-success'>{displayData?.caption}</Card.Title>
           <Card.Text className='text-center'>
-            <button className='btn'><i class="fa-solid fa-trash text-danger"></i></button>
+            <button onClick={()=>handleRemoveVidio(displayData?.id)} className='btn' ><i class="fa-solid fa-trash text-danger"></i></button>
           </Card.Text>
         </Card.Body>
       </Card>
