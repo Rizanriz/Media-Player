@@ -38,6 +38,7 @@ function Add({ setAddvidioRes }) {
       console.log("api");
       try {
         const result = await addVideoAPI(vidioDetail)
+        handleClose()
         if (result.status >= 200 && result.status < 300) {
           console.log(result.data);
           setAddvidioRes(result.data)

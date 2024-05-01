@@ -22,3 +22,13 @@ export const getHistoryAPI = async ()=>{
 export const removeHistoryAI = async (videoId)=>{
     return await commonAPI("DELETE",`${server_url}/History/${videoId}`,{})
 }
+
+export const addCategoryAPI = async (categoryDetails)=>{
+    return await commonAPI ("POST",`${server_url}/Category`,categoryDetails)
+}
+export const getCategoryAPI = async ()=>{
+    return await commonAPI("GET",`${server_url}/Category`,"")
+}
+export const removeCategoryAPI = async (categoryId)=>{
+    return await commonAPI("DELETE",`${server_url}/Category/${categoryId}`,{})
+}
