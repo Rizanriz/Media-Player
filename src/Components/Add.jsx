@@ -43,6 +43,7 @@ function Add({ setAddvidioRes }) {
           console.log(result.data);
           setAddvidioRes(result.data)
           setRemoveVidioRes(result.data)
+          setVidioDetail({caption: "", imgURL: "", youtubeURL: ""})
           toast.success(`${result.data.caption} added to yor collection`)
         }
       } catch (error) {

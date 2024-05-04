@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import VidioCard from './VidioCard'
-import { GetallVideoAPI } from '../Services/allAPI'
+import { GetallVideoAPI, getSingleCategoryAPI } from '../Services/allAPI'
 
-function View({addvidioRes}) {
+function View({addvidioRes,removeCategoryVideoRes}) {
 
   const [removeVidioRes,setRemoveVidioRes] = useState("")
   const [allVidios, setAllVidios] = useState([])
 
-
   console.log(allVidios);
   useEffect(() => {
     getAllVidio()
-  }, [addvidioRes,removeVidioRes])
+  }, [addvidioRes,removeVidioRes,removeCategoryVideoRes])
 
   const getAllVidio = async () => {
     try {
@@ -26,9 +25,21 @@ function View({addvidioRes}) {
     }
   }
 
+  const dragOverView = (e)=>{
+    e.preventDefault()
+  }
+  const handleCategoryVideo = async(e)=>{
+    const {categoryId,vidioDetail} = JSON.parse(e.dataTransfer.getData("dataShare"))
+    try {
+      const {data} =await getSingleCategoryAPI(categoryId)
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <div>
-      <Row className='p-3'> {
+      <Row className='p-3' droppable={true} onDragOver={e=>dragOverView(e)} onDrop={e=>handleCategoryVideo}> {
         allVidios.length > 0 ?
           allVidios?.map(vidio => (
             <Col key={vidio?.id} sm={12} md={6} lg={4}>

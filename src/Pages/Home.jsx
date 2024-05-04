@@ -8,6 +8,7 @@ import Category from '../Components/Category'
 function Home() {
 
   const [addvidioRes,setAddvidioRes] = useState("")
+  const [removeCategoryVideoRes,setRemoveCategoryVideoRes] = useState("")
   
   return (
     <div>
@@ -15,10 +16,10 @@ function Home() {
         <div className="row">
           <div className="col-lg-6">
           <h2 className='text-center'>All Vidios</h2>
-          <View addvidioRes={addvidioRes}/>
+          <View addvidioRes={addvidioRes} removeCategoryVideoRes={removeCategoryVideoRes}/>
           </div>
           <div className="col-lg-6">
-            <Category/>
+            <Category setRemoveCategoryVideoRes={setRemoveCategoryVideoRes}/>
           </div>
         </div>
         <Link to={"/History"}> <button className='btn bg-warning mt-5'>Watch History</button> </Link>
