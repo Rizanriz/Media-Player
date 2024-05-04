@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import VidioCard from './VidioCard'
-import { GetallVideoAPI, getSingleCategoryAPI } from '../Services/allAPI'
+import { GetallVideoAPI, addVideoAPI, getSingleCategoryAPI, updateCategoryAPI } from '../Services/allAPI'
 
 function View({addvidioRes,removeCategoryVideoRes}) {
 
@@ -33,6 +33,13 @@ function View({addvidioRes,removeCategoryVideoRes}) {
     try {
       const {data} =await getSingleCategoryAPI(categoryId)
       console.log(data);
+      const updatedCategoryVideoList = data.allVidios.filter(item=>item.id!==vidioDetail.id)
+      console.log(updatedCategoryVideoList);
+      const {categoryName,id} = data
+      const categoryResult = await updateCategoryAPI(categoryId,{id,categoryName,allVidios:updatedCategoryVideoList})
+      await addVideoAPI(vidioDetail)
+      getAllVidio()
+
     } catch (error) {
       console.log(error);
     }
