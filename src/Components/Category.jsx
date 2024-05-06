@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { addCategoryAPI, getCategoryAPI, getVidioAPI, removeCategoryAPI, removeVidioAPI, updateCategoryAPI } from '../Services/allAPI';
 import VidioCard from './VidioCard';
 
-function Category({setRemoveCategoryVideoRes}) {
+function Category({setRemoveCategoryVideoRes,refreshCategory}) {
 
   const [allCategory,setAllCategory] = useState([])
   const [categoryName,setCategoryName] = useState("")
@@ -17,7 +17,7 @@ function Category({setRemoveCategoryVideoRes}) {
 
   useEffect(()=>{
     getAllCategory()
-  },[])
+  },[refreshCategory])
 
   const getAllCategory = async()=>{
     try {
@@ -76,11 +76,13 @@ function Category({setRemoveCategoryVideoRes}) {
     }
   }
 
-  const vidioDragStarted = (e,categoryId,vidioDetail)=>{
-    let dataShare = {vidioDetail,categoryId}
+  const vidioDragStarted = (e,vidioDetail,categoryId)=>{
     console.log("movee" ,vidioDetail,categoryId);
+    let dataShare = {vidioDetail,categoryId}
     e.dataTransfer.setData("dataShare",JSON.stringify(dataShare))
   }
+
+
   return (
     <>
       <div className="d-flex justify-content-around mb-5">

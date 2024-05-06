@@ -9,6 +9,7 @@ function Home() {
 
   const [addvidioRes,setAddvidioRes] = useState("")
   const [removeCategoryVideoRes,setRemoveCategoryVideoRes] = useState("")
+  const [refreshCategory,setRefreshCategory] = useState("")
   
   return (
     <div>
@@ -16,10 +17,10 @@ function Home() {
         <div className="row">
           <div className="col-lg-6">
           <h2 className='text-center'>All Vidios</h2>
-          <View addvidioRes={addvidioRes} removeCategoryVideoRes={removeCategoryVideoRes}/>
+          <View setRefreshCategory={setRefreshCategory} addvidioRes={addvidioRes} removeCategoryVideoRes={removeCategoryVideoRes}/>
           </div>
           <div className="col-lg-6">
-            <Category setRemoveCategoryVideoRes={setRemoveCategoryVideoRes}/>
+            <Category refreshCategory={refreshCategory} setRemoveCategoryVideoRes={setRemoveCategoryVideoRes}/>
           </div>
         </div>
         <Link to={"/History"}> <button className='btn bg-warning mt-5'>Watch History</button> </Link>
